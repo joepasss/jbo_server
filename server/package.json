@@ -1,0 +1,27 @@
+{
+  "name": "jbo_server",
+  "version": "1.0.0",
+  "description": "joe's backoffice server",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start_with_nodemon": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts",
+    "dev": "./scripts/dev.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joepasss/jbo_server.git"
+  },
+  "author": "joepasss",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joepasss/jbo_server/issues"
+  },
+  "homepage": "https://github.com/joepasss/jbo_server#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
