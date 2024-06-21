@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start_with_nodemon": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts",
-    "dev": "./scripts/dev.sh"
+    "dev": "./scripts/dev.sh",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -19,10 +20,20 @@
     "url": "https://github.com/joepasss/jbo_server/issues"
   },
   "homepage": "https://github.com/joepasss/jbo_server#readme",
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "devDependencies": {
     "@eslint/js": "^9.5.0",
-    "eslint": "^9.5.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.0",
     "globals": "^15.6.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
     "nodemon": "^3.1.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
