@@ -1,38 +1,31 @@
 import express from "express";
-import http from "http";
-import socketIo from "socket.io";
+import { createServer } from "node:http";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 
 const app = express();
-const server = http.createServer(app);
-console.log("HELLO")
-const io = socketIo(server);
-const port = 3000;
+const server = createServer(app);
 
-app.use(express.static("public"));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
+app.use(express.static(join(__dirname, "dist")));
+
+app.get("*.map", (_, res) => {
+  res.status(204).send();
 });
 
-app.get("/api/test", (req, res) => {
-  res.json("hello");
+app.get("*.js.map", (_, res) => {
+  res.status(204).send();
 });
 
-io.on("connection", (socket) => {
-  console.log("A user connected");
-
-  // 클라이언트로부터의 메시지 수신
-  socket.on("chat message", (msg) => {
-    console.log("Message received: " + msg);
-    io.emit("chat message", msg); // 모든 클라이언트로 메시지 브로드캐스트
-  });
-
-  // 클라이언트 연결 해제
-  socket.on("disconnect", () => {
-    console.log("A user disconnected");
-  });
+app.get("/favicon.ico", (_, res) => {
+  res.status(204).send();
 });
 
-app.listen(port, () => {
-  console.log(`server running at http://localhost:${port}`);
+app.get("/", (_, res) => {
+  res.sendFile(join(__dirname, "dist/index.html"));
+});
+
+server.listen(3000, () => {
+  console.log("server running at localhost:3000");
 });
